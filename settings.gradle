@@ -11,6 +11,7 @@ include(
 //    'freetype-async',
     'i18n',
     'inject',
+    'kryonet',
     'log',
     'math',
     'scene2d',
