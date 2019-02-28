@@ -1,3 +1,5 @@
 dependencies {
     provided "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    provided "com.esotericsoftware:kryo:$kryoVersion"
+    provided "kryonet:kryonet:$kryoNetVersion"
 }
