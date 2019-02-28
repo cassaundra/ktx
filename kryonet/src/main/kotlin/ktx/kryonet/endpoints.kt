@@ -38,12 +38,26 @@ inline fun EndPoint.onDisconnect(crossinline body: (conn: Connection) -> Unit) {
  * will not be processed until it returns.
  *
  * @param body The function to invoke when an object of type [T] has been received from the [Connection].
+ * @param T The type of the object to be received
  */
 inline fun <reified T : Any> EndPoint.onReceive(crossinline body: (conn: Connection, obj: T) -> Unit) {
   addListener(object : Listener() {
     override fun received(conn: Connection, obj: Any) {
       if (obj is T)
         body.invoke(conn, obj)
+    }
+  })
+}
+
+/**
+ * Listen to when the connection is below the idle threshold ([Connection.setIdleThreshold]).
+ *
+ * @param body The function to invoke when the connection is below the idle threshold.
+ */
+inline fun EndPoint.onIdle(crossinline body: (conn: Connection) -> Unit) {
+  addListener(object : Listener() {
+    override fun idle(conn: Connection) {
+      body.invoke(conn)
     }
   })
 }
